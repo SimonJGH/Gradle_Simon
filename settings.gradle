@@ -1,0 +1,3 @@
+include ':customize'
+include ':app'
+rootProject.name = "Gradle_Simon"

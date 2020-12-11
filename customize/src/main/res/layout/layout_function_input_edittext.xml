@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_function_input_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/hint_input"
+            android:singleLine="true"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_6"
+            android:textColor="@color/gray_333333"
+            android:textColorHint="@color/gray_999999"
+            android:textCursorDrawable="@drawable/icon_cursor_bg"
+            android:textSize="@dimen/dp_16" />
+
+        <ImageButton
+            android:id="@+id/ib_function_input_clear"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:background="@null"
+            android:paddingLeft="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_8"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon_circle_delete"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/ib_function_input_eye"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:background="@null"
+            android:paddingLeft="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_14"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_et_eye"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_function_input_underline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@color/gray_333333" />
+
+</LinearLayout>

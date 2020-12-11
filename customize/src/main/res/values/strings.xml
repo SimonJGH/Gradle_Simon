@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Gradle_Simon</string>
+    <string name="hint_input">请输入</string>
+</resources>
