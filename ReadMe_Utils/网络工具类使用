@@ -1,3 +1,5 @@
+Tips:但凡使用NetworkUtil必须调用  NetworkUtil.DestroyConnManager(); 释放资源
+
 一：网络工具使用：
   //获取网络类型
   int connectedType = NetworkUtil.getConnectedType();
