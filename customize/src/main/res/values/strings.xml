@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Gradle_Simon</string>
+
     <string name="hint_input">请输入</string>
+
+    <string name="signal_best">信号最好</string>
+    <string name="signal_good">信号较好</string>
+    <string name="signal_average">信号一般</string>
+    <string name="signal_poor">信号较差</string>
+    <string name="signal_none">无信号</string>
+
+
 </resources>
