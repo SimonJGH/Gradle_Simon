@@ -1,1 +1,69 @@
+一：网络工具使用：
+  //获取网络类型
+  int connectedType = NetworkUtil.getConnectedType();
+  String netType = "网络类型：" + (connectedType == 0 ? "手机流量" : "WIFI流量");
+  //获取网络是否可用
+  boolean networkAvailable = NetworkUtil.isNetworkAvailable();
+  String netAvailable = networkAvailable ? "网络可用" : "网络不可用";
+  
+  
+二：监听全局网络变化
+  1、在onCreate方法初始化
+  //注册网络监听
+  mNetWorkReceiver = new NetworkReceiver();
+        IntentFilter mFilter = new IntentFilter();
+        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(mNetWorkReceiver, mFilter);
+        mNetWorkReceiver.setOnNetConnectListener(new NetworkReceiver.OnNetConnectListener() {
+            @Override
+            public void onNetConnect() {
+                ToastUtil.getInstance().showShortToastBottom("网络连接成功");
+            }
 
+            @Override
+            public void onNetDisConnect() {
+                ToastUtil.getInstance().showShortToastBottom("网络已断开连接");
+            }
+        });
+        
+2、在onDestroy方法中销毁
+  unregisterReceiver(mNetWorkReceiver);
+  NetworkUtil.DestroyConnManager();
+    
+三：监听wifi状态等级
+  NetworkUtil.getWifiStateLevel(new NetworkStateLevelListener() {
+                    @Override
+                    public void signalBest(int levelResId, String levelResMsg) {
+                        ToastUtil.getInstance().showShortImageToast(levelResId, levelResMsg);
+                    }
+
+                    @Override
+                    public void signalGood(int levelResId, String levelResMsg) {
+                        ToastUtil.getInstance().showShortImageToast(levelResId, levelResMsg);
+                    }
+
+                    @Override
+                    public void signalAverage(int levelResId, String levelResMsg) {
+                        ToastUtil.getInstance().showShortImageToast(levelResId, levelResMsg);
+                    }
+
+                    @Override
+                    public void signalPoor(int levelResId, String levelResMsg) {
+                        ToastUtil.getInstance().showShortImageToast(levelResId, levelResMsg);
+                    }
+
+                    @Override
+                    public void signalNone(int levelResId, String levelResMsg) {
+                        ToastUtil.getInstance().showShortImageToast(levelResId, levelResMsg);
+                    }
+                });
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
