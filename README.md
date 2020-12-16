@@ -1,7 +1,8 @@
 # Gradle_Simon
 
 Tips：
-    Gradle引用：implementation 'com.yds:customize:1.0.1'
+    1、Gradle引用：implementation 'com.yds:customize:1.0.1'
+    2、使用工具类必须初始化：BaseCustomizeUtil.init(this);可以在application也可在启动页的onCreate方法。
 
 一、工具类使用，查看ReadMe_Utils文件夹下对应文件说明
 

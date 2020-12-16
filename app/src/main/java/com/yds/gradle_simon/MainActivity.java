@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.yds.customize.entity.BottomDialogBean;
 import com.yds.customize.util.ToastUtil;
+import com.yds.customize.view.EmptyOrErrorView;
 import com.yds.customize.view.FunctionBottomDialog;
 
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private EmptyOrErrorView emptyview;
+    private boolean hasData = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,26 +33,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button bt_test = findViewById(R.id.bt_test);
         bt_test.setOnClickListener(this);
 
+        emptyview = findViewById(R.id.emptyview);
+        emptyview.setOnEmptyClickListener(new EmptyOrErrorView.OnEmptyClickListener() {
+            @Override
+            public void onEmptyClick() {
+                ToastUtil.getInstance().showShortToast("EmptyClick");
+            }
+        });
+
+        emptyview.showEmpty(R.mipmap.ic_launcher);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_test:
-                List<BottomDialogBean> mList=new ArrayList<>();
-                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"微信"));
-                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"QQ"));
-                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"朋友圈"));
-                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"微博"));
-
-                FunctionBottomDialog functionBottomDialog=new FunctionBottomDialog(MainActivity.this,mList);
-                functionBottomDialog.show();
-                functionBottomDialog.setOnItemClickListener(new FunctionBottomDialog.OnItemClickLintener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        ToastUtil.getInstance().showShortToast("position = "+position);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    hasData = !hasData;
+                    if (hasData) {
+                        emptyview.hide();
+                    } else {
+                        emptyview.showEmpty(R.mipmap.ic_launcher);
                     }
-                });
+                }
                 break;
         }
     }

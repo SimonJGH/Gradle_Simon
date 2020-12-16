@@ -1,0 +1,43 @@
+Tips:占位布局分空数据和错误请求两种占位布局
+    1、emptyview.showEmpty
+    2、emptyview.showError
+
+    //下面以空数据占位为例
+    1、布局
+    <com.yds.customize.view.EmptyOrErrorView
+        android:id="@+id/emptyview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </com.yds.customize.view.EmptyOrErrorView>
+
+    2、代码
+    emptyview = findViewById(R.id.emptyview);
+    emptyview.setOnEmptyClickListener(new EmptyOrErrorView.OnEmptyClickListener() {
+        @Override
+        public void onEmptyClick() {
+            ToastUtil.getInstance().showShortToast("EmptyClick");
+        }
+    });
+
+    emptyview.showEmpty(R.mipmap.ic_launcher);
+
+
+    //点击事件调用，模拟有数据/空数据的展示与隐藏
+    try {
+        Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            hasData = !hasData;
+            if (hasData) {
+                emptyview.hide();
+            } else {
+                 emptyview.showEmpty(R.mipmap.ic_launcher);
+            }
+        }
