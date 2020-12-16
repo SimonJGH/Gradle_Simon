@@ -1,0 +1,17 @@
+Tips:使用
+    //增加展示数据
+    List<BottomDialogBean> mList=new ArrayList<>();
+    mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"微信"));
+    mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"QQ"));
+    mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"朋友圈"));
+    mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"微博"));
+
+    FunctionBottomDialog functionBottomDialog=new FunctionBottomDialog(MainActivity.this,mList);
+    functionBottomDialog.show();
+    functionBottomDialog.setOnItemClickListener(new FunctionBottomDialog.OnItemClickLintener() {
+       @Override
+       public void onItemClick(int position) {
+          //获取点击对应位置回调
+          ToastUtil.getInstance().showShortToast("position = "+position);
+       }
+    });

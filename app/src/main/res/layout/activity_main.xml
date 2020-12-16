@@ -7,13 +7,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.yds.customize.view.FunctionInputEditText
-        android:id="@+id/et_function_input"
+    <Button
+        android:id="@+id/bt_test"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:text="测试"/>
 
 </LinearLayout>

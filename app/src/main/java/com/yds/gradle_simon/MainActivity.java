@@ -3,56 +3,53 @@ package com.yds.gradle_simon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.InputType;
+import android.view.View;
+import android.widget.Button;
 
-import com.yds.customize.view.FunctionInputEditText;
+import com.yds.customize.entity.BottomDialogBean;
+import com.yds.customize.util.ToastUtil;
+import com.yds.customize.view.FunctionBottomDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ./gradlew install
  * ./gradlew bintrayUpload
- *
+ * <p>
  * https://jcenter.bintray.com/com/simon/customize/
  */
-public class MainActivity extends AppCompatActivity {
-
-    private FunctionInputEditText et_function_input;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        et_function_input = findViewById(R.id.et_function_input);
+        Button bt_test = findViewById(R.id.bt_test);
+        bt_test.setOnClickListener(this);
 
-        //设置输入文字颜色
-        et_function_input.setFunctionTextColor(R.color.gray_333333);
-        //设置输入文字大小
-        et_function_input.setFunctionTextSize(16);
-        //设置输入提示文字颜色
-        et_function_input.setFunctionHintTextColor(R.color.gray_999999);
-        //设置输入提示文字
-        et_function_input.setFunctionHintText("请输入...");
-        //设置输入类型
-        et_function_input.setFunctionInputType(InputType.TYPE_CLASS_NUMBER);
-        //设置输入最大字数限制
-        et_function_input.setFunctionInputMaxLength(11);
+    }
 
-        //设置清空按钮是否可用
-        et_function_input.setFunctionClearIconAvailable(true);
-        //设置清空按钮资源样式
-        et_function_input.setFunctionClearIcon(R.mipmap.icon_circle_delete);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_test:
+                List<BottomDialogBean> mList=new ArrayList<>();
+                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"微信"));
+                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"QQ"));
+                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"朋友圈"));
+                mList.add(new BottomDialogBean(R.mipmap.ic_launcher_round,"微博"));
 
-        //设置可视按钮是否可用
-        et_function_input.setFunctionEyeIconAvailable(true);
-        //设置可视按钮资源样式
-        et_function_input.setFunctionEyeIcon(R.drawable.icon_et_eye);
-
-        //设置下划线是否可用
-        et_function_input.setFunctionUnderlineAvailable(true);
-        //设置下划线背景色
-        et_function_input.setFunctionUnderlineColor(R.color.gray_333333);
-        //设置光标颜色
-        et_function_input.setFunctionCursorColor(R.drawable.icon_cursor_bg);
-
+                FunctionBottomDialog functionBottomDialog=new FunctionBottomDialog(MainActivity.this,mList);
+                functionBottomDialog.show();
+                functionBottomDialog.setOnItemClickListener(new FunctionBottomDialog.OnItemClickLintener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        ToastUtil.getInstance().showShortToast("position = "+position);
+                    }
+                });
+                break;
+        }
     }
 }
