@@ -13,4 +13,6 @@
     <color name="gray_333333">#333333</color>
     <color name="gray_666666">#666666</color>
     <color name="gray_999999">#999999</color>
+
+    <color name="black_25">#40000000</color>
 </resources>
