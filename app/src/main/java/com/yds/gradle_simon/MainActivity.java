@@ -22,8 +22,6 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EmptyOrErrorView emptyview;
-    private boolean hasData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,33 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button bt_test = findViewById(R.id.bt_test);
         bt_test.setOnClickListener(this);
 
-        emptyview = findViewById(R.id.emptyview);
-        emptyview.setOnEmptyClickListener(new EmptyOrErrorView.OnEmptyClickListener() {
-            @Override
-            public void onEmptyClick() {
-                ToastUtil.getInstance().showShortToast("EmptyClick");
-            }
-        });
-
-        emptyview.showEmpty(R.mipmap.ic_launcher);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_test:
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    hasData = !hasData;
-                    if (hasData) {
-                        emptyview.hide();
-                    } else {
-                        emptyview.showEmpty(R.mipmap.ic_launcher);
-                    }
-                }
                 break;
         }
     }
