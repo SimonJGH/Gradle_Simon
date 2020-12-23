@@ -96,6 +96,15 @@ public class FunctionInputEditText extends LinearLayout implements View.OnClickL
     }
 
     /**
+     * 获取输入内容
+     *
+     * @return
+     */
+    public String getFunctionInputText() {
+        return et_function_input_msg.getText().toString();
+    }
+
+    /**
      * 设置输入文字颜色
      *
      * @param resColor
