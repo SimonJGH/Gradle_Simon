@@ -12,14 +12,14 @@ import java.util.Map;
 /**
  * 作者：${Simon} on 2016/11/22 0022 17:29
  * <p>
- * 描述：PreferencesUtil-可清空数据
+ * 描述：PreferencesNoClearUtil-不可清空数据
  */
 @SuppressWarnings("all")
-public class PreferencesUtil extends BaseCustomizeUtil {
+public class PreferencesNoClearUtil extends BaseCustomizeUtil {
 
-    public static String PREFERENCE_NAME = "YDSimon";
+    public static String PREFERENCE_NAME = "YDSimonNoClear";
 
-    private PreferencesUtil() {
+    private PreferencesNoClearUtil() {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 

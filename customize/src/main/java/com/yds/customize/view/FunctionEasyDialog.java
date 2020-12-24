@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.yds.customize.util.GlideCacheUtil;
+
 /**
  * 作者：${Simon} on 2016/11/22 0022 17:29
  * <p>
@@ -58,13 +60,13 @@ public class FunctionEasyDialog {
      * @param scaleY   y轴缩放比例  0-默认wrapcontent 1-matchparent
      * @param back     true 支持返回键  false 屏蔽返回键
      */
-    public void createDialog(Activity activity, View inflate, int gravity, Double scaleX, Double scaleY) {
+    public void createDialog(Activity activity, View inflate, int gravity, Double scaleX, Double scaleY, final boolean cancelable) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
                 @Override
                 public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
-                    return true;
+                    return !cancelable;
                 }
             });
             if (dialog != null) {
@@ -72,7 +74,7 @@ public class FunctionEasyDialog {
             } else {
                 dialog = builder.create();
             }
-            dialog.setCanceledOnTouchOutside(false);
+            dialog.setCanceledOnTouchOutside(cancelable);
             /*
              * 一般在广播中使用dialog.getWindow().setType(WindowManager.LayoutParams.
              * TYPE_SYSTEM_ALERT);

@@ -3,6 +3,8 @@ package com.yds.gradle_simon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,6 +12,7 @@ import com.yds.customize.entity.BottomDialogBean;
 import com.yds.customize.util.ToastUtil;
 import com.yds.customize.view.EmptyOrErrorView;
 import com.yds.customize.view.FunctionBottomDialog;
+import com.yds.customize.view.FunctionEasyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_test:
+                View inflate = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
+
+                FunctionEasyDialog.getInstance().createDialog(this,inflate, Gravity.CENTER,0.0,0.0,false);
                 break;
         }
     }
