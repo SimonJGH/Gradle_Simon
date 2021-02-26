@@ -1,0 +1,17 @@
+布局使用：
+
+     //预览布局
+     <com.yds.customize.camerax.CameraXCustomPreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+     //对焦布局
+     <com.yds.customize.camerax.CameraXFocusImageView
+             android:id="@+id/focusView"
+             android:layout_width="75dp"
+             android:layout_height="75dp"
+             app:focus_fail_id="@drawable/focus_focus_failed"
+             app:focus_focusing_id="@drawable/focus_focusing"
+             app:focus_success_id="@drawable/focus_focused" />
+

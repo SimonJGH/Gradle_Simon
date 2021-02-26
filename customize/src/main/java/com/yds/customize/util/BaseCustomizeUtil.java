@@ -14,6 +14,8 @@ public class BaseCustomizeUtil {
     public static void init(Application app) {
         if (mContext == null) {
             mContext = app.getApplicationContext();
+
+            CrashManagerUtil.getInstance(mContext);
         }
     }
 }

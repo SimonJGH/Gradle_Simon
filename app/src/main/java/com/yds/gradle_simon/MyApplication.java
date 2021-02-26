@@ -24,5 +24,7 @@ public class MyApplication extends Application {
         instance = (MyApplication) this.getApplicationContext();
         BaseCustomizeUtil.init(this);
 
+
+
     }
 }

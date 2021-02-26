@@ -15,6 +15,8 @@ import java.io.RandomAccessFile;
  */
 @SuppressWarnings("all")
 public class TextFileUtil {
+//    String innerPath = "/sdcard/Android/data/" + getPackageName() + "/files/";
+//    String outerPath = "/data/data/" + getPackageName() + "/files/";
 
     /**
      * 将字符串写入到文本文件中
