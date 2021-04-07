@@ -1,8 +1,10 @@
-package com.yds.customize.util;
+package com.yds.customize.util.crash;
 
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+
+import com.yds.customize.util.TextFileUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -11,10 +13,10 @@ import java.util.List;
 /**
  * @author YDS
  * @date 2021/2/4
- * @discribe 异常捕捉
+ * @discribe 异常捕捉-app不保活
  */
 @SuppressWarnings("all")
-class CrashManagerUtil implements Thread.UncaughtExceptionHandler {
+class CrashExceptionUtil implements Thread.UncaughtExceptionHandler {
     // 程序的Context对象
     private static Application application;
     private SimpleDateFormat simpleDateFormat;
@@ -24,7 +26,7 @@ class CrashManagerUtil implements Thread.UncaughtExceptionHandler {
     /**
      * 保证只有一个CrashHandler实例
      */
-    private CrashManagerUtil() {
+    private CrashExceptionUtil() {
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
@@ -33,13 +35,13 @@ class CrashManagerUtil implements Thread.UncaughtExceptionHandler {
     /**
      * 获取CrashHandler实例 ,单例模式
      */
-    public static CrashManagerUtil getInstance(Context context) {
+    public static CrashExceptionUtil getInstance(Context context) {
         application = (Application) context.getApplicationContext();
         return SafeMode.CRASH_MANAGER_UTIL;
     }
 
     public static class SafeMode {
-        private static final CrashManagerUtil CRASH_MANAGER_UTIL = new CrashManagerUtil();
+        private static final CrashExceptionUtil CRASH_MANAGER_UTIL = new CrashExceptionUtil();
     }
 
     /**

@@ -3,6 +3,10 @@ package com.yds.gradle_simon;
 import android.app.Application;
 
 import com.yds.customize.util.BaseCustomizeUtil;
+import com.yds.customize.util.crash.CrashExceptionHelper;
+import com.yds.customize.util.crash.CrashExceptionListener;
+
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -25,6 +29,16 @@ public class MyApplication extends Application {
         BaseCustomizeUtil.init(this);
 
 
+        CrashExceptionHelper.INSTANCE.caughtException(instance, new CrashExceptionListener() {
+            @Override
+            public void crashMainException(@NotNull String crashMainMsg) {
 
+            }
+
+            @Override
+            public void crashThreadException(@NotNull String crashThreadMsg) {
+
+            }
+        });
     }
 }

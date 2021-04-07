@@ -1,4 +1,10 @@
-布局使用：
+布局使用：外层要嵌套 FrameLayout布局
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
      //预览布局
      <com.yds.customize.camerax.CameraXCustomPreviewView
@@ -15,3 +21,4 @@
              app:focus_focusing_id="@drawable/focus_focusing"
              app:focus_success_id="@drawable/focus_focused" />
 
+</FrameLayout>

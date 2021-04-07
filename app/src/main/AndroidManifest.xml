@@ -2,10 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yds.gradle_simon">
 
+    <!--摄像头权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--具备摄像头-->
+    <uses-feature android:name="android.hardware.camera.any" />
+    <!--存储图像或者视频权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--录制音频权限-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-feature android:name="android.hardware.camera2.full" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" />
+
     <application
         android:name="com.yds.gradle_simon.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -17,6 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".CameraViewActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".BaseActivity" android:screenOrientation="portrait"/>
+
+
     </application>
 
 </manifest>
