@@ -32,9 +32,10 @@ import java.util.concurrent.Executors
 class CameraxHelper(context: FragmentActivity, lifecycleOwner: LifecycleOwner, cameraView: CameraView) {
     private val TAG = this.javaClass.simpleName
 
-    private var mCameraView: CameraView = cameraView
     private var mContext: FragmentActivity = context
     private var mLifecycleOwner: LifecycleOwner = lifecycleOwner
+    private var mCameraView: CameraView = cameraView
+    // private var mCaptureMode: CameraView.CaptureMode = captureMode  //类型 拍照CameraView.CaptureMode.IMAGE 拍摄mCameraView.captureMode = CameraView.CaptureMode.VIDEO
 
     private var mExecutorService: ExecutorService? = null
     private var mLensFacing = CameraSelector.LENS_FACING_BACK     //摄像头方向
@@ -65,6 +66,7 @@ class CameraxHelper(context: FragmentActivity, lifecycleOwner: LifecycleOwner, c
                 .request { allGranted, grantedList, deniedList ->
                     if (allGranted) { //所有申请的权限都已通过
                         mCameraView.bindToLifecycle(mLifecycleOwner)
+                        // mCameraView.captureMode = CameraView.CaptureMode.MIXED
 
                         mExecutorService = Executors.newSingleThreadExecutor()
                     } else {
@@ -103,7 +105,13 @@ class CameraxHelper(context: FragmentActivity, lifecycleOwner: LifecycleOwner, c
     fun takePicture(updateAlbum: Boolean, listener: CameraxReocrderListener) {
         //创建图片保存的文件地址
         val file = File(imagePath)
-        mCameraView.captureMode = CameraView.CaptureMode.IMAGE
+
+        //设置拍照模式
+        val captureMode = mCameraView.captureMode
+        if (captureMode!=CameraView.CaptureMode.IMAGE){
+            mCameraView.captureMode = CameraView.CaptureMode.IMAGE
+        }
+
         val metadata = ImageCapture.Metadata()
         metadata.isReversedHorizontal = mLensFacing == CameraSelector.LENS_FACING_FRONT
         val outputFileOptions = ImageCapture.OutputFileOptions.Builder(file)
@@ -145,7 +153,13 @@ class CameraxHelper(context: FragmentActivity, lifecycleOwner: LifecycleOwner, c
     fun takeVideo(updateAlbum: Boolean, listener: CameraxReocrderListener) {
         //创建视频保存的文件地址
         val file = File(videoPath)
-        mCameraView.captureMode = CameraView.CaptureMode.VIDEO
+
+        //设置拍照模式
+        val captureMode = mCameraView.captureMode
+        if (captureMode!=CameraView.CaptureMode.VIDEO){
+            mCameraView.captureMode = CameraView.CaptureMode.VIDEO
+        }
+
         val metadata = VideoCapture.Metadata()
         mCameraView.startRecording(file, mExecutorService!!, object : VideoCapture.OnVideoSavedCallback {
             override fun onVideoSaved(outputFileResults: VideoCapture.OutputFileResults) {
