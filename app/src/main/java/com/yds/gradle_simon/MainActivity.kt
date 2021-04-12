@@ -2,6 +2,7 @@ package com.yds.gradle_simon
 
 import android.os.Bundle
 import android.view.View
+import com.yds.customize.util.PopupWindowUtils
 import com.yds.gradle_simon.databinding.ActivityMainBinding
 import java.util.*
 
@@ -20,6 +21,9 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        PopupWindowUtils.getInstance().setPopDismissListener {
+
+        }
 
         initOnClickListener()
     }

@@ -119,10 +119,31 @@ public class PopupWindowUtils {
     }
 
     /**
+     * pop消失监听
+     *
+     * @param listener
+     **/
+    public void setPopDismissListener(PopDismissListener listener) {
+        if (null != popupWindow) {
+            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    listener.dismiss();
+                }
+            });
+        }
+    }
+
+    //pop消失监听
+    interface PopDismissListener {
+        void dismiss();
+    }
+
+    /**
      * 关闭
      */
     public void closePop() {
-        if (popupWindow != null) {
+        if (null != popupWindow) {
             popupWindow.dismiss();
         }
     }
