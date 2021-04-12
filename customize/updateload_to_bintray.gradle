@@ -11,7 +11,7 @@ group = "com.yds"
 //项目名称, 比如implementation 'groupId:artifactId:version'中的artifactId就是这里配置的。
 project.archivesBaseName = "customize"
 //项目引用的版本号，比如implementation 'groupId:artifactId:version'中的version就是这里配置的。
-version = "1.0.5"
+version = "1.0.6"
 
 install {
     repositories.mavenInstaller {

@@ -135,7 +135,7 @@ public class PopupWindowUtils {
     }
 
     //pop消失监听
-    interface PopDismissListener {
+    public interface PopDismissListener {
         void dismiss();
     }
 
