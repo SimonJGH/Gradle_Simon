@@ -1,9 +1,11 @@
 package com.yds.customize.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
 
 import java.util.List;
@@ -45,4 +47,18 @@ public class ActivityUtil {
         }
         return false;
     }
+
+    /**
+     * 判断Activity是否Destroy
+     *
+     * @param mActivity
+     * @return true:已销毁
+     */
+    @SuppressLint("ObsoleteSdkInt")
+    public static boolean isActivityDestroy(Activity mActivity) {
+        return mActivity == null ||
+                mActivity.isFinishing() ||
+                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && mActivity.isDestroyed());
+    }
+
 }

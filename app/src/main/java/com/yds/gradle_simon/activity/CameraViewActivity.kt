@@ -1,19 +1,21 @@
-package com.yds.gradle_simon
+package com.yds.gradle_simon.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.view.CameraView
 import com.yds.customize.camerax.CameraxHelper
 import com.yds.customize.camerax.CameraxReocrderListener
 import com.yds.customize.camerax.RecordButton
+import com.yds.gradle_simon.R
 
 /**
  * CameraView 启动拍照或拍摄
  * 如果想要拍摄或拍照时无黑屏，最好在初始化CameraView时设置CaptureMode
  */
-class CameraViewActivity : BaseActivity() {
+class CameraViewActivity : AppCompatActivity() {
     private lateinit var mRecordButton: RecordButton
     private lateinit var mBtnCameraSwitch: ImageButton
     private lateinit var mCameraView: CameraView
