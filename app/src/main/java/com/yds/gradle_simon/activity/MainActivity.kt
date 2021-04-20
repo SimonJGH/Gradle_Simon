@@ -2,12 +2,12 @@ package com.yds.gradle_simon.activity
 
 import android.os.Bundle
 import android.view.View
+import com.yds.customize.util.IntentUtil
 import com.yds.gradle_simon.R
 import com.yds.gradle_simon.databinding.ActivityMainBinding
 import com.yds.gradle_simon.mvp.BaseActivity
 import com.yds.gradle_simon.mvp.BasePresenter
 import com.yds.gradle_simon.mvp.BaseContract
-import com.yds.customize.util.IntentUtil
 import java.util.*
 
 /**
