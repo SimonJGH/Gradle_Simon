@@ -3,6 +3,7 @@ package com.yds.gradle_simon.activity
 import android.os.Bundle
 import android.view.View
 import com.yds.customize.util.IntentUtil
+import com.yds.customize.view.FunctionLoadingDialog
 import com.yds.gradle_simon.R
 import com.yds.gradle_simon.databinding.ActivityMainBinding
 import com.yds.gradle_simon.mvp.BaseActivity

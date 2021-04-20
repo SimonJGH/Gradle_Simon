@@ -26,8 +26,8 @@ public class FunctionLoadingDialog extends Dialog {
     private TextView tv_loading;
 
     private int mResId = R.mipmap.ic_loading_white;
-    private String mResMsg = getContext().getString(R.string.loading_data);
-    private int mColorId = R.color.gray_333333;
+    private String mResMsg = getContext().getResources().getString(R.string.loading_data);
+    private int mColorId = R.color.white;
     private float mMsgSize = 14f;
 
     private RotateAnimation mRotateAnimation;
@@ -93,7 +93,7 @@ public class FunctionLoadingDialog extends Dialog {
         ImageView iv_loading = findViewById(R.id.iv_loading);
         iv_loading.setImageResource(mResId);
         tv_loading.setText(mResMsg);
-        tv_loading.setTextColor(mColorId);
+        tv_loading.setTextColor(getContext().getResources().getColor(mColorId));
         tv_loading.setTextSize(mMsgSize);
 
         iv_loading.measure(0, 0);
