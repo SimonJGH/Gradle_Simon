@@ -1,4 +1,4 @@
-package com.yds.customize.util;
+package com.yds.customize.util.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,248 +27,119 @@ import java.security.MessageDigest;
 
 /**
  * @author YDS
- * @date 2020/8/19
- * @discribe 拓展工具
+ * @date 2021/5/10
+ * @discribe glide加载引擎
  */
 @SuppressWarnings("all")
-public class GlideLoadUtil extends BaseCustomizeUtil {
+public class GlideEngine implements IImageLoadListener {
     private static float density = -1F;
-    private static int resPlaceholderId = R.drawable.rect_glide_default_error;
-    private static int resErrorId = R.drawable.rect_glide_default_error;
+    private static int resDefaultPlaceholderId = R.drawable.rect_glide_default_error;  //加载默认图片
+    private static int resDefaultErrorId = R.drawable.rect_glide_default_error;        //加载错误默认图片
 
-    /**
-     * 加载常规图片
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     */
-    public static void loadImage(String url, ImageView imageView) {
+    @Override
+    public void display(Context context, String url, ImageView imageView, int resPlaceholderId, int resErrorId) {
+        if (resPlaceholderId == -1) {
+            resPlaceholderId = resDefaultPlaceholderId;
+        }
+
+        if (resErrorId == -1) {
+            resErrorId = resDefaultErrorId;
+        }
+
         RequestOptions options = new RequestOptions()
                 .placeholder(resPlaceholderId)
                 .error(resErrorId)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
+
+        Glide.with(context).load(url).apply(options).into(imageView);
     }
 
-    /**
-     * @param context
-     * @param url
-     * @param imageView
-     * @param resPlaceholderId
-     * @param resErrorId
-     */
-    public static void loadImage(String url, ImageView imageView, int resPlaceholderId, int resErrorId) {
-        RequestOptions options = new RequestOptions()
-                .placeholder(resPlaceholderId)
-                .error(resErrorId)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-    }
+    @Override
+    public void displayFit(Context context, String url, ImageView imageView, int resPlaceholderId, int resErrorId) {
+        if (resPlaceholderId == -1) {
+            resPlaceholderId = resDefaultPlaceholderId;
+        }
 
-    /**
-     * 加载图片自动适配容器大小
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     */
-    public static void loadImageFit(String url, ImageView imageView) {
+        if (resErrorId == -1) {
+            resErrorId = resDefaultErrorId;
+        }
+
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(resPlaceholderId)
                 .error(resErrorId)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
+        Glide.with(context).load(url).apply(options).into(imageView);
     }
 
-    /**
-     * 加载图片自动适配容器大小
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     * @param resPlaceholderId
-     * @param resErrorId
-     */
-    public static void loadImageFit(String url, ImageView imageView, int resPlaceholderId, int resErrorId) {
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(resPlaceholderId)
-                .error(resErrorId)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-    }
+    @Override
+    public void displayRoundImage(Context context, String url, ImageView imageView, int resPlaceholderId, int resErrorId) {
+        if (resPlaceholderId == -1) {
+            resPlaceholderId = resDefaultPlaceholderId;
+        }
 
-    /**
-     * 加载圆角图片
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     * @param corner
-     */
-    public static void loadRectImage(String url, ImageView imageView, float corner) {
-        RequestOptions options = new RequestOptions()
-                .bitmapTransform(new RoundedCorners(dip2px(corner)))
-                .placeholder(resPlaceholderId)
-                .error(resErrorId)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-    }
+        if (resErrorId == -1) {
+            resErrorId = resDefaultErrorId;
+        }
 
-    /**
-     * 加载圆角图片
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     * @param corner
-     * @param resPlaceholderId
-     * @param resErrorId
-     */
-    public static void loadRectImage(String url, ImageView imageView, float corner, int resPlaceholderId, int resErrorId) {
-        RequestOptions options = new RequestOptions()
-                .bitmapTransform(new RoundedCorners(dip2px(corner)))
-                .placeholder(resPlaceholderId)
-                .error(resErrorId)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-    }
-
-    /**
-     * 加载圆角图片-自定义图片四个角弧度
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     * @param leftTop
-     * @param rightTop
-     * @param rightBottom
-     * @param leftBottom
-     * @param corner
-     */
-    public static void loadRectImageCustom(String url, ImageView imageView, boolean leftTop, boolean rightTop, boolean rightBottom, boolean leftBottom, int corner) {
-        RoundedCornersTransform transform = new RoundedCornersTransform(dip2px(corner));
-        transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
-        RequestOptions options = new RequestOptions()
-                .bitmapTransform(transform)
-                .placeholder(resPlaceholderId)
-                .error(resErrorId)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-    }
-
-    /**
-     * 加载圆角图片-自定义图片四个角弧度
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     * @param leftTop
-     * @param rightTop
-     * @param rightBottom
-     * @param leftBottom
-     * @param corner
-     * @param resPlaceholderId
-     * @param resErrorId
-     */
-    public static void loadRectImageCustom(String url, ImageView imageView, boolean leftTop, boolean rightTop, boolean rightBottom, boolean leftBottom, int corner, int resPlaceholderId, int resErrorId) {
-        RoundedCornersTransform transform = new RoundedCornersTransform(dip2px(corner));
-        transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
-        RequestOptions options = new RequestOptions()
-                .bitmapTransform(transform)
-                .placeholder(resPlaceholderId)
-                .error(resErrorId)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-    }
-
-    /**
-     * 加载圆形图片
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     */
-    public static void loadRoundImage(String url, ImageView imageView) {
         RequestOptions options = new RequestOptions()
                 .bitmapTransform(new CircleCrop())
                 .error(resErrorId)
                 .placeholder(resPlaceholderId)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-
-       /*Glide.with(mContext)
-                .load(url)
-                .circleCrop()
-                .placeholder(R.mipmap.icon_default_or_error)
-                .error(R.mipmap.icon_default_or_error)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true)
-                .into(imageView);*/
+        Glide.with(context).load(url).apply(options).into(imageView);
     }
 
-    /**
-     * 加载圆形图片
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     * @param resPlaceholderId
-     * @param resErrorId
-     */
-    public static void loadRoundImage(String url, ImageView imageView, int resPlaceholderId, int resErrorId) {
-        RequestOptions options = new RequestOptions()
-                .bitmapTransform(new CircleCrop())
-                .error(resErrorId)
-                .placeholder(resPlaceholderId)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(mContext).load(url).apply(options).into(imageView);
-    }
+    @Override
+    public void displayRectImage(Context context, String url, ImageView imageView, float corner, int resPlaceholderId, int resErrorId) {
+        if (resPlaceholderId == -1) {
+            resPlaceholderId = resDefaultPlaceholderId;
+        }
 
-    /**
-     * 加载gif
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     */
-    public static void loadGif(String url, ImageView imageView) {
+        if (resErrorId == -1) {
+            resErrorId = resDefaultErrorId;
+        }
+
         RequestOptions options = new RequestOptions()
+                .bitmapTransform(new RoundedCorners(dip2px(context, corner)))
                 .placeholder(resPlaceholderId)
                 .error(resErrorId)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true);
-        Glide.with(mContext).asGif().load(url).apply(options).into(imageView);
+        Glide.with(context).load(url).apply(options).into(imageView);
     }
 
-    /**
-     * 加载gif
-     *
-     * @param context
-     * @param resourceId
-     * @param imageView
-     * @param resPlaceholderId
-     * @param resErrorId
-     */
-    public static void loadGif(int resourceId, ImageView imageView, int resPlaceholderId, int resErrorId) {
+    @Override
+    public void displayRectImageCustom(Context context, String url, ImageView imageView, boolean leftTop, boolean rightTop, boolean rightBottom, boolean leftBottom, int corner) {
+        RoundedCornersTransform transform = new RoundedCornersTransform(context, dip2px(context, corner));
+        transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
+        RequestOptions options = new RequestOptions()
+                .bitmapTransform(transform)
+                .placeholder(resDefaultPlaceholderId)
+                .error(resDefaultErrorId)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .skipMemoryCache(true);
+        Glide.with(context).load(url).apply(options).into(imageView);
+    }
+
+    public void displayGif(Context context, int resourceId, ImageView imageView, int resPlaceholderId, int resErrorId) {
+        if (resPlaceholderId == -1) {
+            resPlaceholderId = resDefaultPlaceholderId;
+        }
+
+        if (resErrorId == -1) {
+            resErrorId = resDefaultErrorId;
+        }
+
         RequestOptions options = new RequestOptions()
                 .placeholder(resPlaceholderId)
                 .error(resErrorId)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true);
-        Glide.with(mContext).asGif().load(resourceId).apply(options).into(imageView);
+        Glide.with(context).asGif().load(resourceId).apply(options).into(imageView);
     }
 
     /**
@@ -278,8 +149,8 @@ public class GlideLoadUtil extends BaseCustomizeUtil {
      * @param dpValue
      * @return
      */
-    public static int dip2px(float dpValue) {
-        return (int) (dpValue * getDensity() + 0.5F);
+    private static int dip2px(Context context, float dpValue) {
+        return (int) (dpValue * getDensity(context) + 0.5F);
     }
 
     /**
@@ -289,8 +160,8 @@ public class GlideLoadUtil extends BaseCustomizeUtil {
      * @param pxValue
      * @return
      */
-    public static int px2dip(float pxValue) {
-        return (int) (pxValue / getDensity() + 0.5F);
+    private static int px2dip(Context context, float pxValue) {
+        return (int) (pxValue / getDensity(context) + 0.5F);
     }
 
     /**
@@ -299,9 +170,9 @@ public class GlideLoadUtil extends BaseCustomizeUtil {
      * @param context
      * @return
      */
-    public static float getDensity() {
+    private static float getDensity(Context context) {
         if (density <= 0F) {
-            density = mContext.getResources().getDisplayMetrics().density;
+            density = context.getResources().getDisplayMetrics().density;
         }
         return density;
     }
@@ -335,8 +206,8 @@ public class GlideLoadUtil extends BaseCustomizeUtil {
          * @param context 上下文
          * @param radius  圆角幅度
          */
-        public RoundedCornersTransform(float radius) {
-            this.mBitmapPool = Glide.get(mContext).getBitmapPool();
+        public RoundedCornersTransform(Context context, float radius) {
+            this.mBitmapPool = Glide.get(context).getBitmapPool();
             this.radius = radius;
         }
 

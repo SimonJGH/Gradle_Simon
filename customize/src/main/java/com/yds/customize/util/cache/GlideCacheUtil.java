@@ -1,4 +1,4 @@
-package com.yds.customize.util;
+package com.yds.customize.util.cache;
 
 import android.os.Looper;
 import android.text.TextUtils;
@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
+import com.yds.customize.util.BaseCustomizeUtil;
 
 import java.io.File;
 import java.math.BigDecimal;

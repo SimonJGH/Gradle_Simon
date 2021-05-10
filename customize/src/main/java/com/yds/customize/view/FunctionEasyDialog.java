@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.yds.customize.util.GlideCacheUtil;
-
 /**
  * 作者：${Simon} on 2016/11/22 0022 17:29
  * <p>

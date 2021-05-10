@@ -68,6 +68,8 @@ dependencies {
     //权限申请
     api 'com.permissionx.guolindev:permissionx:1.3.0'
 
+    api 'org.xutils:xutils:3.8.3'
+
 }
 
 apply from: 'updateload_to_bintray.gradle'
